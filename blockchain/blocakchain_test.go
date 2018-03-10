@@ -17,9 +17,11 @@ func TestBlockchainServer(t *testing.T) {
 
 	go func() {
 		t := time.Now()
-		genesisBlock := Block{0, t.String(), "", "", 0}
+		genesisBlock := Block{0, t.String(), "", 0, "", "", 0}
 		spew.Dump(genesisBlock)
+		mutex.Lock()
 		Blockchain = append(Blockchain, genesisBlock)
+		mutex.Unlock()
 	}()
 	log.Fatal(run())
 }

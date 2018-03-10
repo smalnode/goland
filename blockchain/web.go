@@ -6,12 +6,17 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"sync"
 	"time"
 
 	"github.com/davecgh/go-spew/spew"
 
 	"github.com/gorilla/mux"
 )
+
+const difficulty = 2
+
+var mutex = &sync.Mutex{}
 
 func run() error {
 	mux := makeMuxRouter()
@@ -58,7 +63,10 @@ func handleWriteBlock(w http.ResponseWriter, r *http.Request) {
 	}
 	defer r.Body.Close()
 
-	newBlock, err := generateBlock(Blockchain[len(Blockchain)-1], m.BPM)
+	mutex.Lock()
+	newBlock, err := generateBlock(Blockchain[len(Blockchain)-1], m.BPM, difficulty)
+	mutex.Unlock()
+
 	if err != nil {
 		respondWithJSON(w, r, http.StatusBadRequest, m)
 		return
