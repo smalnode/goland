@@ -22,7 +22,7 @@ func scanMultiply() {
 	for {
 		fmt.Println("Input two integers(CTRL-C to exit): ")
 		var lhs, rhs int64
-		_, err := fmt.Scanf("%d%d\n", &lhs, &rhs)
+		_, err := fmt.Scanln(&lhs, &rhs)
 		if err == nil {
 			fmt.Println(lhs * rhs)
 		}
