@@ -1,0 +1,2 @@
+t=2018-03-07T15:34:16+0800 lvl=eror msg=logtest module=app/server level=error
+t=2018-03-07T15:34:16+0800 lvl=crit msg=logtest module=app/server level=critical
